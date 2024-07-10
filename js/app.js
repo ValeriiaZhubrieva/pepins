@@ -79,15 +79,6 @@
     function removeClasses(array, className) {
         for (var i = 0; i < array.length; i++) array[i].classList.remove(className);
     }
-    let addWindowScrollEvent = false;
-    setTimeout((() => {
-        if (addWindowScrollEvent) {
-            let windowScroll = new Event("windowScroll");
-            window.addEventListener("scroll", (function(e) {
-                document.dispatchEvent(windowScroll);
-            }));
-        }
-    }), 0);
     function addActiveClass(buttonsClass, activeClass) {
         const buttons = document.querySelectorAll(buttonsClass);
         document.addEventListener("click", (function(e) {
@@ -108,6 +99,7 @@
         }));
     }
     addActiveClass(".menu-toggle", "open-dropdown");
+    addActiveClass(".spollers__title", "open-spollers");
     document.addEventListener("mouseover", (e => {
         const targetElement = e.target;
         if (!isMobile.any()) {
@@ -120,11 +112,9 @@
     }));
     document.addEventListener("click", (e => {
         const targetElement = e.target;
-        if (targetElement.closest(".dropdown__back")) removeClasses(document.querySelectorAll(".menu__item.open-dropdown"), "open-dropdown");
         if (targetElement.closest(".trade-table__arrow")) targetElement.closest(".trade-table__row").classList.toggle("open-table");
         if (targetElement.closest(".footer__nav-title")) targetElement.closest(".footer__nav-column").classList.toggle("open-footer-nav");
     }));
-    window["FLS"] = false;
     isWebp();
     menuInit();
 })();
